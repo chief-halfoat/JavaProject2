@@ -10,6 +10,8 @@
 //        valid password cannot contain userName.
 
 
+import java.sql.SQLOutput;
+
 class Registration{
     private String email;
     private String userName;
@@ -32,16 +34,22 @@ class Registration{
         }
     }
     public void setUserName(String userName) {
-        if (userName.length()>6){
-            this.userName = userName;
-        } else {
-            System.out.println("Invalid Username");
+        if (userName.isBlank()) {
+            System.out.println("Username cannot be blank");
+        } else if (userName.length()>6){
+                this.userName = userName;
+            } else {
+                System.out.println("Username must be at least 7 characters");
+            }
         }
-    }
 
     public void setPassword(String password) {
-        if (password.length()<7|| password.contains(userName)){
-            System.out.println("Invalid Password");
+        if (password.length()<7){
+            System.out.println("Password must be at least 7 characters");
+        } else if (password.contains(userName)){
+            System.out.println("Password cannot contain Username");
+        } else if(password.isBlank()){
+            System.out.println("Password cannot be blank");
         } else {
             this.password = password;
         }
